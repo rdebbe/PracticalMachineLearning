@@ -1,0 +1,119 @@
+---
+title: "PracticalMachineLearning"
+author: "R. Debbe"
+date: "October 2, 2016"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+This document reports the work done as project for the Coursera Practical Machine Learning where we were given data collected on six subjects that performed Weight Lifting Exercise "Bicep Curl-up" while wearing accelerometers mounted in one arm, one forearm and their  belt near the body's center of gravity. Results from that study were published and their data was made public. Details about that research can be found at: 
+ <http://groupware.les.inf.puc-rio.br/har>
+
+The following libraries were loaded to the session during this project:
+
+```{r libraries}
+library(caret)
+library(mlbench)
+```
+
+# The original training and testing data sets
+
+```{r get data}
+training <- read.csv(file="../pml-training.csv", header=TRUE, sep=",")
+testing  <- read.csv(file="../pml-testing.csv", header=TRUE, sep=",")
+
+```
+The training data has 19622 samples with 160 features. The test data set has only 20 samples with the same number of features but a considerable fraction of the test features have different data types as compared to the corresponding variables in the training set; they have been stored as logical vectors while the training set has them as factors. The followin snippet of the data summary shows such mismatch.
+
+```{r summary, echo = FALSE}
+str(training[,15:20], list.len = 10)
+str(testing[,15:20], list.len = 10)
+```
+
+These features found to have mismatched data types were then removed from both data sets:
+
+```{r reduce }
+txt<- c(names(training))
+reducedTraining<- training[, -grep("^kurtosis|^skewness|^max|^min|^avg|^var|^stddev|^amplitude", 
+                                   txt, perl=TRUE, value=FALSE)]
+txt<- c(names(testing))                                   
+reducedTesting<- testing[, -grep("^kurtosis|^skewness|^max|^min|^avg|^var|^stddev|^amplitude", 
+                                   txt, perl=TRUE, value=FALSE)]
+                           
+```
+
+The first 7 variables on both data sets have no prediction power and appear to have purely book-keeping puposes; they were also removed with:
+
+```{r first 7}
+reducedTraining <- reducedTraining[, -c(1, 2, 3, 4, 5, 6, 7)]
+reducedTesting  <- reducedTesting[, -c(1, 2, 3, 4, 5, 6, 7)]
+```
+
+The remaining 53 features appear as good candidates for predictor as their correlations are visible the following summary plot:
+
+```{r summary plot, echo = FALSE}
+featurePlot(x = training[, 8:11], 
+            y = training$classe, 
+            plot = "pairs",
+            ## Add a key at the top 
+            auto.key = list(columns = 3))
+```
+We then divide the training data set in two sets to be able to do cross-validation as we fit several models.
+
+```{r split training}
+inTrain <- createDataPartition(y=reducedTraining$classe, p=0.5, list=FALSE)
+subtraining <- reducedTraining[inTrain, ]
+subtesting <- reducedTraining[-inTrain, ]
+
+dim(subtraining)
+dim(subtesting)
+```
+
+We used the R package mlbench to compare three models: Random Forest (rf) with max number of trees set to 300, Boosted Random Forest (gbm) with default parameters, and a simpler classifier like Support Vector Machine (svm) also with default parameters. The comparison is done with 10 K-Fold cross validation and tree repeats:
+
+```{r mlbench }
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+```
+
+The actual training run overnight on OSX 'El Capitan' :
+
+```{r fit }
+set.seed(42)
+svmModel<- train(classe ~., data=subtraining, method="svmRadial",  trControl=control)
+confusionMatrix(subtesting$classe, predict(svmModel, subtesting[,-53]))
+set.seed(42)
+gbmModel<- train(classe ~., data=subtraining, method="gbm", verbose=FALSE, trControl=control)
+confusionMatrix(subtesting$classe, predict(gbmModel, subtesting[,-53]))
+set.seed(42)
+rfModel_0p5_tree300<- train(classe ~., data=subtraining, method="rf", ntree = 300, trControl=control)
+confusionMatrix(subtesting$classe, predict(rfModel_0p5_tree300, subtesting[,-53]))
+```
+
+As was already mentioned by the instructor, Random Forest is the best classifier as it achieved the highest accuracy as shown in the plot below:
+
+```{r compare }
+comparisons <- resamples(list(RF=rfModel_0p5_tree300, GBM=gbmModel, SVM=svmModel))
+summary(comparisons)
+bwplot(comparisons)
+```
+
+Some time was invested in exploring the parameter space to the 'rf' model but was not pursued beyon the maximum number of trees set at 300 because the resulting accurarcy was not improving much beyond that value.
+
+# Predict the outcome of the test data set
+
+As mentioned above, the test data set was prepared in the same manner as the training set. Using our best model (Random Forest) we get the following outcome:
+
+```{r test predict }
+results <- predict(rfModel_0p5_tree300, reducedTesting[,-53])
+
+```
+# Acknowledgement:
+We used the data collected by the Human Activity Research project:
+Ugulino, W.; Cardador, D.; Vega, K.; Velloso, E.; Milidiu, R.; Fuks, H. Wearable Computing: Accelerometers' Data Classification of Body Postures and Movements. Proceedings of 21st Brazilian Symposium on Artificial Intelligence. Advances in Artificial Intelligence - SBIA 2012. In: Lecture Notes in Computer Science. , pp. 52-61. Curitiba, PR: Springer Berlin / Heidelberg, 2012. ISBN 978-3-642-34458-9. DOI: 10.1007/978-3-642-34459-6_6.
