@@ -143,33 +143,33 @@ confusionMatrix(subtesting$classe, predict(svmModel, subtesting[,-53]))
 ## 
 ##           Reference
 ## Prediction    A    B    C    D    E
-##          A 2762    9   14    5    0
-##          B  184 1611   89    3   11
-##          C   20   99 1547   37    8
-##          D   13   17  195 1377    6
-##          E    7   20   72   52 1652
+##          A 2752    6   25    3    4
+##          B  182 1622   86    3    5
+##          C   23   93 1545   44    6
+##          D   10    7  203 1385    3
+##          E    3   17   84   57 1642
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.9122          
-##                  95% CI : (0.9065, 0.9178)
-##     No Information Rate : 0.3044          
+##                Accuracy : 0.9119          
+##                  95% CI : (0.9061, 0.9175)
+##     No Information Rate : 0.3028          
 ##     P-Value [Acc > NIR] : < 2.2e-16       
 ##                                           
-##                   Kappa : 0.8887          
+##                   Kappa : 0.8884          
 ##  Mcnemar's Test P-Value : < 2.2e-16       
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            0.9250   0.9174   0.8070   0.9342   0.9851
-## Specificity            0.9959   0.9644   0.9792   0.9723   0.9814
-## Pos Pred Value         0.9900   0.8488   0.9041   0.8563   0.9163
-## Neg Pred Value         0.9681   0.9817   0.9543   0.9882   0.9969
-## Prevalence             0.3044   0.1790   0.1954   0.1503   0.1709
-## Detection Rate         0.2815   0.1642   0.1577   0.1404   0.1684
+## Sensitivity            0.9266   0.9295   0.7952   0.9283   0.9892
+## Specificity            0.9944   0.9658   0.9789   0.9732   0.9802
+## Pos Pred Value         0.9864   0.8546   0.9030   0.8613   0.9107
+## Neg Pred Value         0.9689   0.9845   0.9509   0.9870   0.9978
+## Prevalence             0.3028   0.1779   0.1981   0.1521   0.1692
+## Detection Rate         0.2805   0.1653   0.1575   0.1412   0.1674
 ## Detection Prevalence   0.2844   0.1935   0.1744   0.1639   0.1838
-## Balanced Accuracy      0.9604   0.9409   0.8931   0.9532   0.9833
+## Balanced Accuracy      0.9605   0.9476   0.8870   0.9507   0.9847
 ```
 
 ```r
@@ -221,33 +221,33 @@ confusionMatrix(subtesting$classe, predict(gbmModel, subtesting[,-53]))
 ## 
 ##           Reference
 ## Prediction    A    B    C    D    E
-##          A 2742   30   10    3    5
-##          B   64 1768   61    1    4
-##          C    0   50 1638   21    2
-##          D    1    6   72 1522    7
-##          E    3   30   17   26 1727
+##          A 2728   34   21    3    4
+##          B   80 1754   59    4    1
+##          C    0   52 1625   31    3
+##          D    0   11   57 1532    8
+##          E    3   18   23   23 1736
 ## 
 ## Overall Statistics
 ##                                           
-##                Accuracy : 0.9579          
-##                  95% CI : (0.9537, 0.9618)
-##     No Information Rate : 0.2864          
+##                Accuracy : 0.9557          
+##                  95% CI : (0.9514, 0.9596)
+##     No Information Rate : 0.2865          
 ##     P-Value [Acc > NIR] : < 2.2e-16       
 ##                                           
-##                   Kappa : 0.9467          
-##  Mcnemar's Test P-Value : < 2.2e-16       
+##                   Kappa : 0.9439          
+##  Mcnemar's Test P-Value : 2.199e-15       
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            0.9758   0.9384   0.9110   0.9676   0.9897
-## Specificity            0.9931   0.9836   0.9909   0.9896   0.9906
-## Pos Pred Value         0.9828   0.9315   0.9573   0.9465   0.9578
-## Neg Pred Value         0.9903   0.9853   0.9802   0.9938   0.9978
-## Prevalence             0.2864   0.1920   0.1833   0.1603   0.1779
-## Detection Rate         0.2795   0.1802   0.1670   0.1551   0.1760
+## Sensitivity            0.9705   0.9385   0.9104   0.9617   0.9909
+## Specificity            0.9911   0.9819   0.9893   0.9908   0.9917
+## Pos Pred Value         0.9778   0.9241   0.9497   0.9527   0.9628
+## Neg Pred Value         0.9882   0.9855   0.9802   0.9926   0.9980
+## Prevalence             0.2865   0.1905   0.1820   0.1624   0.1786
+## Detection Rate         0.2781   0.1788   0.1656   0.1562   0.1770
 ## Detection Prevalence   0.2844   0.1935   0.1744   0.1639   0.1838
-## Balanced Accuracy      0.9845   0.9610   0.9510   0.9786   0.9901
+## Balanced Accuracy      0.9808   0.9602   0.9498   0.9762   0.9913
 ```
 
 ```r
@@ -287,33 +287,33 @@ confusionMatrix(subtesting$classe, predict(rfModel_0p5_tree300, subtesting[,-53]
 ## 
 ##           Reference
 ## Prediction    A    B    C    D    E
-##          A 2783    6    1    0    0
-##          B   16 1875    7    0    0
-##          C    0   18 1684    9    0
-##          D    1    2   41 1563    1
-##          E    0    3    6    7 1787
+##          A 2781    0    7    1    1
+##          B   24 1864    9    1    0
+##          C    0   22 1689    0    0
+##          D    0    0   54 1552    2
+##          E    0    0    1    4 1798
 ## 
 ## Overall Statistics
-##                                         
-##                Accuracy : 0.988         
-##                  95% CI : (0.9856, 0.99)
-##     No Information Rate : 0.2854        
-##     P-Value [Acc > NIR] : < 2.2e-16     
-##                                         
-##                   Kappa : 0.9848        
-##  Mcnemar's Test P-Value : NA            
+##                                           
+##                Accuracy : 0.9872          
+##                  95% CI : (0.9847, 0.9893)
+##     No Information Rate : 0.2859          
+##     P-Value [Acc > NIR] : < 2.2e-16       
+##                                           
+##                   Kappa : 0.9838          
+##  Mcnemar's Test P-Value : NA              
 ## 
 ## Statistics by Class:
 ## 
 ##                      Class: A Class: B Class: C Class: D Class: E
-## Sensitivity            0.9939   0.9848   0.9684   0.9899   0.9994
-## Specificity            0.9990   0.9971   0.9967   0.9945   0.9980
-## Pos Pred Value         0.9975   0.9879   0.9842   0.9720   0.9911
-## Neg Pred Value         0.9976   0.9963   0.9932   0.9980   0.9999
-## Prevalence             0.2854   0.1941   0.1773   0.1610   0.1823
-## Detection Rate         0.2837   0.1911   0.1717   0.1593   0.1822
+## Sensitivity            0.9914   0.9883   0.9597   0.9961   0.9983
+## Specificity            0.9987   0.9957   0.9973   0.9932   0.9994
+## Pos Pred Value         0.9968   0.9821   0.9871   0.9652   0.9972
+## Neg Pred Value         0.9966   0.9972   0.9912   0.9993   0.9996
+## Prevalence             0.2859   0.1923   0.1794   0.1588   0.1836
+## Detection Rate         0.2835   0.1900   0.1722   0.1582   0.1833
 ## Detection Prevalence   0.2844   0.1935   0.1744   0.1639   0.1838
-## Balanced Accuracy      0.9965   0.9909   0.9825   0.9922   0.9987
+## Balanced Accuracy      0.9951   0.9920   0.9785   0.9947   0.9989
 ```
 
 As was already mentioned by the instructor, Random Forest is the best classifier as it achieved the highest accuracy as shown in the plot below:
@@ -334,15 +334,15 @@ summary(comparisons)
 ## 
 ## Accuracy 
 ##       Min. 1st Qu. Median   Mean 3rd Qu.   Max. NA's
-## RF  0.9806  0.9850 0.9888 0.9881  0.9908 0.9939    0
-## GBM 0.9480  0.9544 0.9593 0.9588  0.9638 0.9715    0
-## SVM 0.8930  0.9001 0.9052 0.9077  0.9144 0.9327    0
+## RF  0.9776  0.9847 0.9873 0.9870  0.9898 0.9949    0
+## GBM 0.9490  0.9534 0.9592 0.9589  0.9643 0.9705    0
+## SVM 0.8981  0.9072 0.9134 0.9126  0.9193 0.9246    0
 ## 
 ## Kappa 
 ##       Min. 1st Qu. Median   Mean 3rd Qu.   Max. NA's
-## RF  0.9755  0.9810 0.9858 0.9849  0.9884 0.9923    0
-## GBM 0.9341  0.9423 0.9485 0.9479  0.9542 0.9639    0
-## SVM 0.8644  0.8733 0.8798 0.8830  0.8915 0.9147    0
+## RF  0.9716  0.9806 0.9839 0.9835  0.9871 0.9936    0
+## GBM 0.9354  0.9410 0.9484 0.9480  0.9549 0.9626    0
+## SVM 0.8708  0.8824 0.8903 0.8892  0.8976 0.9045    0
 ```
 
 ```r
@@ -352,6 +352,36 @@ bwplot(comparisons)
 ![](PracticalMachineLearning_files/figure-html/compare-1.png)<!-- -->
 
 Some time was invested in exploring the parameter space to the 'rf' model but was not pursued beyon the maximum number of trees set at 300 because the resulting accurarcy was not improving much beyond that value.
+
+# Out of sample error
+
+Our best model, Random Forest has an accuracy of 0.9876 the expected error for out of sample prediction is thus (1 - accuracy)*100 = 1.24%
+
+We can get a better estimate using cross-validation by looking at the details of the fit to the rf model:
+
+
+```r
+rfModel_0p5_tree300$finalModel
+```
+
+```
+## 
+## Call:
+##  randomForest(x = x, y = y, ntree = 300, mtry = param$mtry) 
+##                Type of random forest: classification
+##                      Number of trees: 300
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 1.22%
+## Confusion matrix:
+##      A    B    C    D    E class.error
+## A 2784    4    2    0    0 0.002150538
+## B   19 1868   12    0    0 0.016324381
+## C    0   20 1688    3    0 0.013442431
+## D    0    0   44 1559    5 0.030472637
+## E    1    1    4    5 1793 0.006097561
+```
+where the out-of-sample error is quoted as 1.15%
 
 # Predict the outcome of the test data set
 

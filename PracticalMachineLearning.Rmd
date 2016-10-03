@@ -106,6 +106,17 @@ bwplot(comparisons)
 
 Some time was invested in exploring the parameter space to the 'rf' model but was not pursued beyon the maximum number of trees set at 300 because the resulting accurarcy was not improving much beyond that value.
 
+# Out of sample error
+
+Our best model, Random Forest has an accuracy of 0.9876 the expected error for out of sample prediction is thus (1 - accuracy)*100 = 1.24%
+
+We can get a better estimate using cross-validation by looking at the details of the fit to the rf model:
+
+```{r OOB}
+rfModel_0p5_tree300$finalModel
+```
+where the out-of-sample error is quoted as 1.15%
+
 # Predict the outcome of the test data set
 
 As mentioned above, the test data set was prepared in the same manner as the training set. Using our best model (Random Forest) we get the following outcome:
